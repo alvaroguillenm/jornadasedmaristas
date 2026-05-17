@@ -1,40 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
-import heroImg from "@/assets/hero-sed.jpg";
-import activitiesImg from "@/assets/activities.jpg";
-import projectsImg from "@/assets/projects.jpg";
+import { useMemo, useState } from "react";
+import heroImg from "@/assets/maristas-school.jpg";
+import sed1 from "@/assets/sed-1.png";
+import sed2 from "@/assets/sed-2.png";
+import sed3 from "@/assets/sed-3.png";
+import sed4 from "@/assets/sed-4.png";
+import sed5 from "@/assets/sed-5.jpeg";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
       { title: "XXXII Jornada SED en Familia — Maristas Cartagena" },
-      { name: "description", content: "Un día para cambiar el mundo. Fiesta solidaria con deportes, talleres, gastronomía y tómbola. Inscripciones abiertas." },
+      { name: "description", content: "Fiesta solidaria con deportes, talleres, gastronomía y rifas en Maristas Cartagena." },
     ],
   }),
 });
 
-// Target date for countdown — adjust as needed
-const EVENT_DATE = new Date("2026-05-23T10:00:00+02:00");
-
-function useCountdown(target: Date) {
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  const diff = Math.max(0, target.getTime() - now);
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff / 3600000) % 24);
-  const m = Math.floor((diff / 60000) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-  return { d, h, m, s };
-}
-
 const navLinks = [
-  { href: "#sobre", label: "Sobre SED" },
+  { href: "#sobre", label: "Jornada SED" },
   { href: "#actividades", label: "Actividades" },
-  { href: "#programa", label: "Programa" },
   { href: "#inscripciones", label: "Inscripciones" },
   { href: "#proyectos", label: "Proyectos" },
   { href: "#patrocinadores", label: "Patrocinadores" },
@@ -53,69 +38,35 @@ function Nav() {
             <a key={l.href} href={l.href} className="hover:text-foreground transition-colors">{l.label}</a>
           ))}
         </nav>
-        <a href="#inscripciones" className="inline-flex items-center rounded-full bg-foreground px-5 py-2 text-sm font-semibold text-background hover:opacity-90 transition">
-          Participa
-        </a>
       </div>
     </header>
   );
 }
 
-function Countdown() {
-  const { d, h, m, s } = useCountdown(EVENT_DATE);
-  const items = [
-    { v: d, l: "Días" },
-    { v: h, l: "Horas" },
-    { v: m, l: "Min" },
-    { v: s, l: "Seg" },
-  ];
-  return (
-    <div className="flex gap-3 sm:gap-4">
-      {items.map((it) => (
-        <div key={it.l} className="flex-1 rounded-2xl bg-background/15 backdrop-blur-sm border border-white/20 px-4 py-3 text-center">
-          <div className="font-display text-3xl sm:text-4xl font-bold tabular-nums text-white">{String(it.v).padStart(2, "0")}</div>
-          <div className="text-[10px] sm:text-xs uppercase tracking-widest text-white/70 mt-1">{it.l}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function Hero() {
   return (
-    <section id="top" className="relative min-h-screen overflow-hidden bg-hero">
+    <section id="top" className="relative min-h-screen overflow-hidden">
       <img
         src={heroImg}
-        alt="Familias y alumnos celebrando la Jornada SED en Maristas Cartagena"
+        alt="Colegio Maristas Cartagena"
         width={1920}
         height={1280}
-        className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-luminosity"
+        className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/95" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/60 to-background" />
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-end px-6 pt-32 pb-20 sm:pb-28">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white">
-            <span className="h-2 w-2 rounded-full bg-sun animate-pulse" />
-            XXXII Edición · 2026
+          <div className="inline-flex items-center gap-2 rounded-full border border-foreground/20 bg-background/70 backdrop-blur-sm px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-foreground">
+            <span className="h-2 w-2 rounded-full bg-sun" />
+            XXXII Edición
           </div>
-          <h1 className="mt-6 font-display text-5xl sm:text-7xl lg:text-8xl font-bold leading-[0.95] text-white text-balance">
-            Un día para <em className="not-italic bg-sun bg-clip-text text-transparent">cambiar el mundo</em>.
+          <h1 className="mt-6 font-display text-5xl sm:text-7xl lg:text-8xl font-bold leading-[0.95] text-foreground text-balance">
+            Un día para cambiar el mundo.
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-white/85 text-balance">
+          <p className="mt-6 max-w-xl text-lg text-foreground/80 text-balance">
             Jornada SED en Familia · Maristas Cartagena. Más de 30 años de solidaridad,
             educación y desarrollo. Una fiesta para ayudar.
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a href="#inscripciones" className="inline-flex items-center rounded-full bg-sun px-7 py-3.5 font-semibold text-sun-foreground shadow-glow hover:scale-[1.02] transition">
-              Inscríbete →
-            </a>
-            <a href="#sobre" className="inline-flex items-center rounded-full border border-white/40 px-7 py-3.5 font-semibold text-white hover:bg-white/10 transition">
-              Conoce SED
-            </a>
-          </div>
-          <div className="mt-12 max-w-xl">
-            <Countdown />
-          </div>
         </div>
       </div>
     </section>
@@ -134,24 +85,19 @@ function Sobre() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-5">
-            <span className="text-xs font-semibold uppercase tracking-widest text-primary">¿Qué es SED?</span>
+            <span className="text-xs font-semibold uppercase tracking-widest text-primary">La Jornada</span>
             <h2 className="mt-4 font-display text-4xl sm:text-5xl font-bold leading-tight text-balance">
-              Solidaridad,<br /> Educación y<br /> Desarrollo.
+              Una gran fiesta solidaria.
             </h2>
           </div>
           <div className="lg:col-span-7 space-y-6 text-lg text-muted-foreground leading-relaxed">
-            <p>
-              <strong className="text-foreground">SED</strong> es una ONG vinculada a los colegios Maristas
-              que trabaja en proyectos educativos, sociales y de cooperación internacional,
-              principalmente en <span className="text-foreground">África</span> y <span className="text-foreground">América Latina</span>.
-            </p>
             <p>
               La <strong className="text-foreground">Jornada SED</strong> del colegio Maristas Cartagena es una gran fiesta solidaria anual
               donde participan alumnos, familias, profesores, antiguos alumnos y empresas colaboradoras.
               Un evento con más de tres décadas de tradición.
             </p>
             <blockquote className="border-l-4 border-sun pl-5 italic font-display text-2xl text-foreground">
-              “Solidaridad que educa. Más de 30 años construyendo futuro.”
+              "Solidaridad que educa. Más de 30 años construyendo futuro."
             </blockquote>
           </div>
         </div>
@@ -164,6 +110,15 @@ function Sobre() {
             </div>
           ))}
         </div>
+
+        <div className="mt-16 grid gap-4 sm:grid-cols-2">
+          <div className="overflow-hidden rounded-3xl">
+            <img src={sed1} alt="Alumnos en la Jornada SED" loading="lazy" className="w-full h-80 object-cover" />
+          </div>
+          <div className="overflow-hidden rounded-3xl">
+            <img src={sed3} alt="Profesor en la Jornada SED" loading="lazy" className="w-full h-80 object-cover" />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -174,7 +129,7 @@ const activities = [
   { icon: "🎨", title: "Talleres", desc: "Pintacaras, manualidades, cuentacuentos e hinchables para los más pequeños." },
   { icon: "🍳", title: "Gastronomía", desc: "Concurso gastronómico, bar solidario y comida en familia." },
   { icon: "🎤", title: "Maristas Talent", desc: "El gran concurso de talento del colegio. Música, baile y mucha emoción." },
-  { icon: "🎟️", title: "Tómbola y Rifas", desc: "Premios solidarios y un rastrillo lleno de sorpresas." },
+  { icon: "🎟️", title: "Rifas", desc: "Premios solidarios y un rastrillo lleno de sorpresas." },
   { icon: "🎮", title: "Juegos virtuales", desc: "Gaming, Escape Room y retos digitales para secundaria." },
 ];
 
@@ -207,43 +162,7 @@ function Actividades() {
         </div>
 
         <div className="mt-12 overflow-hidden rounded-3xl">
-          <img src={activitiesImg} alt="Niños y niñas en actividades deportivas" loading="lazy" width={1280} height={960} className="w-full h-72 sm:h-96 object-cover" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const program = [
-  { time: "10:00", act: "Apertura oficial" },
-  { time: "10:30", act: "Torneos deportivos" },
-  { time: "12:00", act: "Talleres infantiles y pintacaras" },
-  { time: "13:00", act: "Concurso gastronómico" },
-  { time: "14:30", act: "Comida solidaria en familia" },
-  { time: "16:00", act: "Maristas Talent" },
-  { time: "17:00", act: "Rifas y tómbola" },
-  { time: "18:30", act: "Concierto en directo" },
-  { time: "19:30", act: "Clausura" },
-];
-
-function Programa() {
-  return (
-    <section id="programa" className="py-28 sm:py-36">
-      <div className="mx-auto max-w-5xl px-6">
-        <span className="text-xs font-semibold uppercase tracking-widest text-primary">Programa</span>
-        <h2 className="mt-4 font-display text-4xl sm:text-5xl font-bold text-balance">
-          El día, hora a hora.
-        </h2>
-        <div className="mt-12 divide-y divide-border rounded-3xl bg-card border border-border overflow-hidden">
-          {program.map((p, i) => (
-            <div key={p.time} className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr] items-center gap-6 px-6 sm:px-10 py-5 hover:bg-muted/40 transition">
-              <div className="font-display text-2xl sm:text-3xl font-bold text-primary tabular-nums">{p.time}</div>
-              <div className="flex items-center gap-3 text-base sm:text-lg">
-                <span className="h-2 w-2 rounded-full bg-sun" />
-                {p.act}
-              </div>
-            </div>
-          ))}
+          <img src={sed4} alt="Alumnos preparando el bar solidario" loading="lazy" className="w-full h-72 sm:h-96 object-cover" />
         </div>
       </div>
     </section>
@@ -255,7 +174,6 @@ type Etapa = {
   title: string;
   subtitle: string;
   withInscription: { name: string; price?: string }[];
-  withoutInscription: { name: string; price?: string }[];
 };
 
 const etapas: Etapa[] = [
@@ -266,10 +184,6 @@ const etapas: Etapa[] = [
     withInscription: [
       { name: "Concurso de dibujo", price: "3 €" },
       { name: "Fútbol sala (5 años)", price: "3 €" },
-    ],
-    withoutInscription: [
-      { name: "Pesca de patitos", price: "3 ekis" },
-      { name: "Talleres", price: "3 ekis" },
     ],
   },
   {
@@ -283,10 +197,6 @@ const etapas: Etapa[] = [
       { name: "Fútbol Sala", price: "3 €" },
       { name: "Balonmano", price: "3 €" },
       { name: "Concurso Gastronómico", price: "3,5 €" },
-    ],
-    withoutInscription: [
-      { name: "Pesca de patitos", price: "3 ekis" },
-      { name: "Talleres", price: "3 ekis" },
     ],
   },
   {
@@ -304,7 +214,6 @@ const etapas: Etapa[] = [
       { name: "Voley", price: "3 €" },
       { name: "Concurso Gastronómico", price: "3,5 €" },
     ],
-    withoutInscription: [],
   },
   {
     key: "secundaria",
@@ -324,7 +233,6 @@ const etapas: Etapa[] = [
       { name: "Escape Room", price: "3 €" },
       { name: "Concurso Gastronómico", price: "3,5 €" },
     ],
-    withoutInscription: [],
   },
   {
     key: "bach",
@@ -344,7 +252,6 @@ const etapas: Etapa[] = [
       { name: "Fútbol Antiguos Alumnos (con árbitro)", price: "5 €" },
       { name: "Concurso Gastronómico", price: "3,5 €" },
     ],
-    withoutInscription: [],
   },
 ];
 
@@ -360,11 +267,6 @@ function Inscripciones() {
             <h2 className="mt-4 font-display text-4xl sm:text-5xl font-bold text-balance">
               Elige tu etapa y participa.
             </h2>
-            <p className="mt-4 text-muted-foreground">
-              Inscripciones del <strong className="text-foreground">martes 7</strong> al <strong className="text-foreground">lunes 13 de abril</strong>.
-              Infantil y Primaria con tutores · Secundaria, Bachiller y Antiguos Alumnos en
-              recreos en Biblioteca (11:00–11:30).
-            </p>
           </div>
         </div>
 
@@ -384,11 +286,11 @@ function Inscripciones() {
           ))}
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        <div className="mt-8">
           <div className="rounded-3xl bg-card border border-border p-8 shadow-soft">
             <div className="flex items-center justify-between">
               <h3 className="font-display text-2xl font-bold">{current.title}</h3>
-              <span className="text-xs font-semibold uppercase tracking-widest text-primary">Con inscripción</span>
+              <span className="text-xs font-semibold uppercase tracking-widest text-primary">Actividades</span>
             </div>
             <p className="text-sm text-muted-foreground">{current.subtitle}</p>
             <ul className="mt-6 divide-y divide-border">
@@ -399,28 +301,6 @@ function Inscripciones() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="rounded-3xl bg-sun/15 border border-sun/40 p-8">
-            <div className="flex items-center justify-between">
-              <h3 className="font-display text-2xl font-bold">Sin inscripción</h3>
-              <span className="text-xs font-semibold uppercase tracking-widest text-sun-foreground">Libre</span>
-            </div>
-            <p className="text-sm text-muted-foreground">¡Apúntate en el momento!</p>
-            {current.withoutInscription.length > 0 ? (
-              <ul className="mt-6 divide-y divide-sun/30">
-                {current.withoutInscription.map((a) => (
-                  <li key={a.name} className="flex items-center justify-between py-3">
-                    <span>{a.name}</span>
-                    {a.price && <span className="font-semibold">{a.price}</span>}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="mt-10 rounded-2xl bg-background/60 p-6 text-sm text-muted-foreground">
-                Esta etapa no dispone de actividades libres específicas. Consulta el resto
-                de propuestas del día: tómbola, bar solidario, conciertos y rastrillo.
-              </div>
-            )}
           </div>
         </div>
       </div>
@@ -439,7 +319,7 @@ function Proyectos() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="relative overflow-hidden rounded-3xl">
-            <img src={projectsImg} alt="Niños beneficiarios de proyectos SED en África" loading="lazy" width={1280} height={960} className="w-full h-[480px] object-cover" />
+            <img src={sed2} alt="Alumnos en la grada de la Jornada SED" loading="lazy" className="w-full h-[480px] object-cover" />
             <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-background/90 backdrop-blur p-5">
               <p className="text-sm font-semibold text-primary">100% de lo recaudado</p>
               <p className="text-sm text-muted-foreground">va destinado a proyectos solidarios.</p>
@@ -490,6 +370,9 @@ function Patrocinadores() {
             </div>
           ))}
         </div>
+        <div className="mt-16 overflow-hidden rounded-3xl">
+          <img src={sed5} alt="Alumnos en la grada animando" loading="lazy" className="w-full h-72 sm:h-96 object-cover" />
+        </div>
       </div>
     </section>
   );
@@ -510,14 +393,6 @@ function CTA() {
               Voluntariado, donaciones, patrocinio o simplemente venir a disfrutar.
               Hay muchas formas de sumar.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <a href="#inscripciones" className="inline-flex items-center rounded-full bg-sun px-7 py-3.5 font-semibold text-sun-foreground hover:scale-[1.02] transition">
-                Inscríbete
-              </a>
-              <a href="mailto:sed@maristascartagena.com" className="inline-flex items-center rounded-full border border-white/40 px-7 py-3.5 font-semibold text-white hover:bg-white/10 transition">
-                Quiero colaborar
-              </a>
-            </div>
           </div>
         </div>
       </div>
@@ -528,7 +403,7 @@ function CTA() {
 function Footer() {
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-16 grid gap-10 sm:grid-cols-3">
+      <div className="mx-auto max-w-7xl px-6 py-16 grid gap-10 sm:grid-cols-2">
         <div>
           <div className="flex items-center gap-2">
             <span className="grid h-9 w-9 place-items-center rounded-full bg-hero text-primary-foreground font-display font-bold">S</span>
@@ -545,15 +420,6 @@ function Footer() {
             30203 Cartagena, Murcia
           </address>
         </div>
-        <div>
-          <h4 className="font-display text-base font-bold">Enlaces</h4>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li><a href="#sobre" className="hover:text-foreground">Sobre SED</a></li>
-            <li><a href="#programa" className="hover:text-foreground">Programa</a></li>
-            <li><a href="#inscripciones" className="hover:text-foreground">Inscripciones</a></li>
-            <li><a href="#patrocinadores" className="hover:text-foreground">Patrocinadores</a></li>
-          </ul>
-        </div>
       </div>
       <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} Jornada SED · Maristas Cartagena
@@ -569,7 +435,6 @@ function Index() {
       <Hero />
       <Sobre />
       <Actividades />
-      <Programa />
       <Inscripciones />
       <Proyectos />
       <Patrocinadores />
