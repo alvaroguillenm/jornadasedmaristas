@@ -6,8 +6,7 @@
 // You can pass additional config via defineConfig({ vite: { ... } }) if needed.
 import { defineConfig } from 'vite'
 
-export default defineConfig({
-  base: '/jornadasedmaristas/',
+export default defineConfig({base: '/jornadasedmaristas/',
   tanstackStart: {
     server: { entry: "server" },
   },
